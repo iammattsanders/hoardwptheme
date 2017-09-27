@@ -26,9 +26,16 @@ add_action ( 'admin_init', 'hoard_custom_settings');
 add_action( 'admin_menu', 'hoard_add_admin_page' );
 
 function hoard_custom_settings() {
- register_setting( 'hoard-settings-group', 'first_name');
+register_setting( 'hoard-settings-group', 'first_name');
+register_setting( 'hoard-settings-group', 'last_name');
+register_setting( 'hoard-settings-group', 'twitter', 'hoard_sanitize_twitter');
+register_setting( 'hoard-settings-group', 'facebook');
+// register_setting( 'hoard-settings-group', 'first_name');
+// register_setting( 'hoard-settings-group', 'first_name');
  add_settings_section( 'hoard-sidebar-options', 'Sidebar Options', 'hoard_sidebar_options', 'hoard');
- add_settings_field( 'sidebar-name', 'First Name', 'hoard_sidebar_name', 'hoard', 'hoard-sidebar-options');
+ add_settings_field( 'sidebar-name', 'Full Name', 'hoard_sidebar_name', 'hoard', 'hoard-sidebar-options');
+  add_settings_field( 'sidebar-twitter', 'Twitter', 'hoard_sidebar_twitter', 'hoard', 'hoard-sidebar-options');
+    add_settings_field( 'sidebar-facebook', 'Facebook', 'hoard_sidebar_facebook', 'hoard', 'hoard-sidebar-options');
 }
 
 function hoard_sidebar_options() {
@@ -37,7 +44,27 @@ function hoard_sidebar_options() {
 
 function hoard_sidebar_name() {
   $firstName = esc_attr( get_option( 'first_name' ) );
-  echo '<input type="text" name="first_name" value="'.$firstName.'" placeholder="First Name"/> ';
+  $lastName = esc_attr( get_option( 'last_name' ) );
+  echo '<input type="text" name="first_name" value="'.$firstName.'" placeholder="First Name"/>
+   <input type="text" name="last_name" value="'.$lasttName.'" placeholder="Last Name"/>';
+}
+
+function hoard_sidebar_twitter() {
+  $twitter = esc_attr( get_option( 'twitter' ) );
+  echo '<input type="text" name="twitter" value="'.$twitter.'" placeholder="Twitter"/><p class="description">Input your username without the @ character</p>';
+}
+
+function hoard_sidebar_facebook() {
+  $facebook = esc_attr( get_option( 'facebook' ) );
+  echo '<input type="text" name="facebook" value="'.$facebook.'" placeholder="Facebook"/>';
+}
+
+// Sanitization settings
+
+function hoard_sanitize_twitter( $input ){
+  $output = sanitize_text_field($input);
+  $output = str_replace('@', '', $output);
+  return $output;
 }
 
 function hoard_theme_create_page() {
