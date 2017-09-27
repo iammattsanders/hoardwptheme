@@ -1,3 +1,7 @@
 <h1>HoardTheme Options</h1>
-<h3 class ="title">Manage Theme Options</h3>
-<p>Customise the CSS for your theme.</p>
+<?php settings_errors(); ?>
+<form method="post" action="options.php">
+ <?php settings_fields( 'hoard-settings-group'); ?>
+ <?php do_settings_sections('hoard'); ?>
+ <?php submit_button(); ?>
+</form>
