@@ -2,6 +2,7 @@
 <?php settings_errors(); ?>
 
 <?php
+$profilePicture = esc_attr( get_option( 'profile_picture' ) );
 $firstName = esc_attr( get_option( 'first_name' ) );
 $lastName = esc_attr( get_option( 'last_name' ) );
 $fullName = $firstName . ' ' . $lastName;
@@ -11,6 +12,10 @@ $facebook = esc_attr( get_option( 'facebook' ) );
  ?>
 
 <div class="hoard-sidebar-preview">
+  <div class="image-container">
+    <div id="profile-picture-preview" class="profile-picture" style="background-image: url(<?php print $profilePicture; ?>);">
+    </div>
+  </div>
   <div class="hoard-sidebar">
     <h1 class="hoard-name">
       <?php print $fullName; ?>
