@@ -28,12 +28,14 @@ add_action( 'admin_menu', 'hoard_add_admin_page' );
 function hoard_custom_settings() {
 register_setting( 'hoard-settings-group', 'first_name');
 register_setting( 'hoard-settings-group', 'last_name');
+register_setting( 'hoard-settings-group', 'tagline');
 register_setting( 'hoard-settings-group', 'twitter', 'hoard_sanitize_twitter');
 register_setting( 'hoard-settings-group', 'facebook');
 // register_setting( 'hoard-settings-group', 'first_name');
 // register_setting( 'hoard-settings-group', 'first_name');
  add_settings_section( 'hoard-sidebar-options', 'Sidebar Options', 'hoard_sidebar_options', 'hoard');
  add_settings_field( 'sidebar-name', 'Full Name', 'hoard_sidebar_name', 'hoard', 'hoard-sidebar-options');
+  add_settings_field( 'sidebar-tagline', 'Tagline', 'hoard_sidebar_tagline', 'hoard', 'hoard-sidebar-options');
   add_settings_field( 'sidebar-twitter', 'Twitter', 'hoard_sidebar_twitter', 'hoard', 'hoard-sidebar-options');
     add_settings_field( 'sidebar-facebook', 'Facebook', 'hoard_sidebar_facebook', 'hoard', 'hoard-sidebar-options');
 }
@@ -47,6 +49,11 @@ function hoard_sidebar_name() {
   $lastName = esc_attr( get_option( 'last_name' ) );
   echo '<input type="text" name="first_name" value="'.$firstName.'" placeholder="First Name"/>
    <input type="text" name="last_name" value="'.$lasttName.'" placeholder="Last Name"/>';
+}
+
+function hoard_sidebar_tagline() {
+  $tagline = esc_attr( get_option( 'tagline' ) );
+  echo '<input type="text" name="tagline" value="'.$tagline.'" placeholder="Tagline"/>';
 }
 
 function hoard_sidebar_twitter() {
