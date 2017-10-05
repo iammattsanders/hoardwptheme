@@ -1,4 +1,4 @@
-<h1>HoardTheme Options</h1>
+<h1>Hoard Sidebar Options</h1>
 <?php settings_errors(); ?>
 
 <?php
